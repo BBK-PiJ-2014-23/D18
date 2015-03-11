@@ -1,7 +1,4 @@
 import java.util.concurrent.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ExecutorService;
-
 public class TextLoop implements Runnable {
     public static final int COUNT = 10;
     private final String name;
@@ -28,8 +25,8 @@ public class TextLoop implements Runnable {
             }
         } else {
             for (int i = 0; i < 10; i++) {
-                Executor e = Executors.newFixedThreadPool(2);
                 Runnable r = new TextLoop("Thread " + i);
+                Executor e = Executors.newCachedThreadPool();
                 e.execute(r);
             }
         }
